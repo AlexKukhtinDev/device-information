@@ -19,9 +19,10 @@ import lombok.NoArgsConstructor;
 public class DeviceWithAlarms {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "deviceWithAlarmsId", nullable = false, updatable = false)
   private Long id;
-  @Column(name = "date_Of_Last_Contact")
+  @Column(name = "dateOfLastContact")
   private LocalDate dateOfLastContact;
-  @Column(name = "current_Volume_Indicators_Different")
+  @Column(name = "currentVolumeIndicatorsDifferent")
   private Double currentVolumeIndicatorsDifferent;
 }
