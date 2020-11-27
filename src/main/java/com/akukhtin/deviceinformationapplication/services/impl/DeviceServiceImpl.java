@@ -25,9 +25,13 @@ public class DeviceServiceImpl implements DeviceService {
     Device converterDeviceDtoToDevice = getConverterDeviceDtoToDevice(deviceDto);
     log.info("Was successful converting DeviceDto to Device ");
     log.info("Start processing with save to data base");
-    Device saveNewDevice = deviceRepository.save(converterDeviceDtoToDevice);
+    Device saveDevice = getSave(converterDeviceDtoToDevice);
     log.info("Save was successful");
-    return Optional.of(saveNewDevice);
+    return Optional.of(saveDevice);
+  }
+
+  private Device getSave(Device converterDeviceDtoToDevice) {
+    return deviceRepository.save(converterDeviceDtoToDevice);
   }
 
   private Device getConverterDeviceDtoToDevice(DeviceDto deviceDto) {

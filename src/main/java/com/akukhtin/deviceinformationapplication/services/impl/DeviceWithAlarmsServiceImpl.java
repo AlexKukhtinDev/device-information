@@ -24,9 +24,9 @@ public class DeviceWithAlarmsServiceImpl implements DeviceWithAlarmsService {
     DeviceWithAlarms deviceWithAlarms =
             getConverterDeviceWithAlarmsDtoToDeviceWithAlarms(deviceWithAlarmsDto);
     log.info("Start processing with save to data base");
-    DeviceWithAlarms saveNewDeviceWithAlarms = getSave(deviceWithAlarms);
+    DeviceWithAlarms saveDeviceWithAlarms = getSave(deviceWithAlarms);
     log.info("Save was successful");
-    return Optional.of(saveNewDeviceWithAlarms);
+    return Optional.of(saveDeviceWithAlarms);
   }
 
   private DeviceWithAlarms getSave(DeviceWithAlarms deviceWithAlarms) {

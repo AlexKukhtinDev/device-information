@@ -4,6 +4,7 @@ import com.akukhtin.deviceinformationapplication.dto.DeviceDto;
 import com.akukhtin.deviceinformationapplication.dto.DeviceWithAlarmsDto;
 import com.akukhtin.deviceinformationapplication.entity.Device;
 import com.akukhtin.deviceinformationapplication.entity.DeviceWithAlarms;
+import java.time.LocalDate;
 
 // It is a simple mapper
 public class Converter {
@@ -13,7 +14,7 @@ public class Converter {
     newDevice.setSerialNumber(deviceDto.getSerialNumber());
     newDevice.setManufacturerType(deviceDto.getManufacturerType());
     newDevice.setDeviceType(deviceDto.getDeviceType());
-    newDevice.setDateOfLastContact(deviceDto.getDateOfLastContact());
+    newDevice.setDateOfLastContact();
     newDevice.setCurrentVolumeIndicators(deviceDto.getCurrentVolumeIndicators());
     return newDevice;
   }

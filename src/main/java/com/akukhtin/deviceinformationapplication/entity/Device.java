@@ -28,7 +28,7 @@ public class Device {
   @Column(name = "device_type")
   private Integer deviceType;
   @Column(name = "date_Of_Last_Contact")
-  private LocalDate dateOfLastContact;
+  private String dateOfLastContact;
   @Column(name = "current_Volume_Indicators")
   private Double currentVolumeIndicators;
 }
