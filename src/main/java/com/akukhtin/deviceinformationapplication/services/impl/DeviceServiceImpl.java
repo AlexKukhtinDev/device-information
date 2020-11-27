@@ -21,13 +21,13 @@ public class DeviceServiceImpl implements DeviceService {
   }
 
   @Override
-  public Optional<Device> create(DeviceDto deviceDto) {
+  public Device create(DeviceDto deviceDto) {
     Device converterDeviceDtoToDevice = getConverterDeviceDtoToDevice(deviceDto);
     log.info("Was successful converting DeviceDto to Device ");
     log.info("Start processing with save to data base");
     Device saveDevice = getSave(converterDeviceDtoToDevice);
     log.info("Save was successful");
-    return Optional.of(saveDevice);
+    return saveDevice;
   }
 
   private Device getSave(Device converterDeviceDtoToDevice) {

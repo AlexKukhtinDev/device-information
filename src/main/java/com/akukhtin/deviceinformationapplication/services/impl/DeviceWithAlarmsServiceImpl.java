@@ -20,13 +20,13 @@ public class DeviceWithAlarmsServiceImpl implements DeviceWithAlarmsService {
   }
 
   @Override
-  public Optional<DeviceWithAlarms> create(DeviceWithAlarmsDto deviceWithAlarmsDto) {
+  public DeviceWithAlarms create(DeviceWithAlarmsDto deviceWithAlarmsDto) {
     DeviceWithAlarms deviceWithAlarms =
             getConverterDeviceWithAlarmsDtoToDeviceWithAlarms(deviceWithAlarmsDto);
     log.info("Start processing with save to data base");
     DeviceWithAlarms saveDeviceWithAlarms = getSave(deviceWithAlarms);
     log.info("Save was successful");
-    return Optional.of(saveDeviceWithAlarms);
+    return saveDeviceWithAlarms;
   }
 
   private DeviceWithAlarms getSave(DeviceWithAlarms deviceWithAlarms) {

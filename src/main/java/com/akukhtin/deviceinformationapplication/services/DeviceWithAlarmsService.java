@@ -5,5 +5,5 @@ import com.akukhtin.deviceinformationapplication.entity.DeviceWithAlarms;
 import java.util.Optional;
 
 public interface DeviceWithAlarmsService {
-  Optional<DeviceWithAlarms> create(DeviceWithAlarmsDto deviceWithAlarmsDto);
+  DeviceWithAlarms create(DeviceWithAlarmsDto deviceWithAlarmsDto);
 }

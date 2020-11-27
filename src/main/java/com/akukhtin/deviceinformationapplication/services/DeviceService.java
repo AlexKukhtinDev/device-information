@@ -5,5 +5,5 @@ import com.akukhtin.deviceinformationapplication.entity.Device;
 import java.util.Optional;
 
 public interface DeviceService {
-  Optional<Device> create (DeviceDto deviceDto);
+  Device create (DeviceDto deviceDto);
 }
