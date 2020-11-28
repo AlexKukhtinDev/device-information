@@ -6,6 +6,7 @@ import com.akukhtin.deviceinformationapplication.entity.Device;
 import com.akukhtin.deviceinformationapplication.repository.DeviceRepository;
 
 import com.akukhtin.deviceinformationapplication.services.DeviceService;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,19 @@ public class DeviceServiceImpl implements DeviceService {
     log.info("Save was successful");
     return saveDevice;
   }
+
+  @Override
+  public DeviceDto findById(Long id) {
+    Optional<Device> findById = deviceRepository.findById(id);
+    DeviceDto deviceDto = null;
+    if (findById.isPresent()) {
+      Device device = findById.get();
+      deviceDto = Converter.converterDeviceToDeviceDto(device);
+    }
+    return deviceDto;
+  }
+
+
 
   private Device getSave(Device converterDeviceDtoToDevice) {
     return deviceRepository.save(converterDeviceDtoToDevice);

@@ -4,6 +4,8 @@ import com.akukhtin.deviceinformationapplication.dto.DeviceDto;
 import com.akukhtin.deviceinformationapplication.entity.Device;
 import com.akukhtin.deviceinformationapplication.services.DeviceService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +20,13 @@ public class DeviceController {
     this.deviceService = deviceService;
   }
 
-  @PostMapping("devices")
+  @PostMapping("devices/")
   public ResponseEntity<Device> create(@RequestBody DeviceDto deviceDto) {
     return ResponseEntity.ok(deviceService.create(deviceDto));
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<DeviceDto> getCurrentDevice(@PathVariable Long id) {
+    return ResponseEntity.ok(deviceService.findById(id));
   }
 }

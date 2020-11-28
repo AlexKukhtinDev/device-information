@@ -5,7 +5,9 @@ import com.akukhtin.deviceinformationapplication.dto.util.Converter;
 import com.akukhtin.deviceinformationapplication.entity.DeviceWithAlarms;
 import com.akukhtin.deviceinformationapplication.repository.DeviceWithAlarmsRepository;
 import com.akukhtin.deviceinformationapplication.services.DeviceWithAlarmsService;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,42 @@ public class DeviceWithAlarmsServiceImpl implements DeviceWithAlarmsService {
     DeviceWithAlarms saveDeviceWithAlarms = getSave(deviceWithAlarms);
     log.info("Save was successful");
     return saveDeviceWithAlarms;
+  }
+
+  @Override
+  public List<DeviceWithAlarmsDto> findAllByDateOfLastContactBefore(
+          LocalDateTime dateOfLastContact) {
+    List<DeviceWithAlarms> allByDateOfLastContactBefore =
+            getAllByDateOfLastContactBefore(dateOfLastContact);
+
+    return allByDateOfLastContactBefore
+            .stream()
+            .map(Converter::converterDeviceWithAlarmsToDeviceWithAlarmsDto)
+            .collect(Collectors.toList());
+  }
+
+  @Override
+  public List<DeviceWithAlarmsDto> findAllByCurrentVolumeIndicatorsDifferentLessThan(
+          Double currentVolumeIndicatorsDifferent) {
+    List<DeviceWithAlarms> deviceWithAlarmsList =
+            getAllByCurrentVolumeIndicatorsDifferentLessThan(currentVolumeIndicatorsDifferent);
+
+    return  deviceWithAlarmsList
+            .stream()
+            .map(Converter::converterDeviceWithAlarmsToDeviceWithAlarmsDto)
+            .collect(Collectors.toList());
+  }
+
+
+  private List<DeviceWithAlarms>
+  getAllByCurrentVolumeIndicatorsDifferentLessThan(Double currentVolumeIndicatorsDifferent) {
+    return deviceWithAlarmsRepository
+            .findAllByCurrentVolumeIndicatorsDifferentLessThan(currentVolumeIndicatorsDifferent);
+  }
+
+  private List<DeviceWithAlarms> getAllByDateOfLastContactBefore(LocalDateTime dateOfLastContact) {
+    return deviceWithAlarmsRepository
+            .findAllByDateOfLastContactBefore(dateOfLastContact);
   }
 
   private DeviceWithAlarms getSave(DeviceWithAlarms deviceWithAlarms) {

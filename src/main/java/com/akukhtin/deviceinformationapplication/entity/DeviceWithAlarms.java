@@ -1,6 +1,6 @@
 package com.akukhtin.deviceinformationapplication.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +22,7 @@ public class DeviceWithAlarms {
   @Column(name = "deviceWithAlarmsId", nullable = false, updatable = false)
   private Long id;
   @Column(name = "dateOfLastContact")
-  private LocalDate dateOfLastContact;
+  private LocalDateTime dateOfLastContact;
   @Column(name = "currentVolumeIndicatorsDifferent")
   private Double currentVolumeIndicatorsDifferent;
 }
