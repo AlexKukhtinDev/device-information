@@ -3,12 +3,14 @@ package com.akukhtin.deviceinformationapplication.services.impl;
 import com.akukhtin.deviceinformationapplication.dto.DeviceWithAlarmsDto;
 import com.akukhtin.deviceinformationapplication.dto.util.Converter;
 import com.akukhtin.deviceinformationapplication.entity.DeviceWithAlarms;
+import com.akukhtin.deviceinformationapplication.repository.DeviceRepository;
 import com.akukhtin.deviceinformationapplication.repository.DeviceWithAlarmsRepository;
 import com.akukhtin.deviceinformationapplication.services.DeviceWithAlarmsService;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,9 +18,12 @@ import org.springframework.stereotype.Service;
 public class DeviceWithAlarmsServiceImpl implements DeviceWithAlarmsService {
 
   private final DeviceWithAlarmsRepository deviceWithAlarmsRepository;
+  private final DeviceRepository deviceRepository;
 
-  public DeviceWithAlarmsServiceImpl(DeviceWithAlarmsRepository deviceWithAlarmsRepository) {
+  public DeviceWithAlarmsServiceImpl(DeviceWithAlarmsRepository deviceWithAlarmsRepository, 
+                                     DeviceRepository deviceRepository) {
     this.deviceWithAlarmsRepository = deviceWithAlarmsRepository;
+    this.deviceRepository = deviceRepository;
   }
 
   @Override
@@ -42,7 +47,7 @@ public class DeviceWithAlarmsServiceImpl implements DeviceWithAlarmsService {
             .map(Converter::converterDeviceWithAlarmsToDeviceWithAlarmsDto)
             .collect(Collectors.toList());
   }
-
+  
   @Override
   public List<DeviceWithAlarmsDto> findAllByCurrentVolumeIndicatorsDifferentLessThan(
           Double currentVolumeIndicatorsDifferent) {
@@ -76,5 +81,15 @@ public class DeviceWithAlarmsServiceImpl implements DeviceWithAlarmsService {
           DeviceWithAlarmsDto deviceWithAlarmsDto) {
     log.info("Start process with converting DeviceDto to Device ");
     return Converter.converterDeviceWithAlarmsDtoToDeviceWithAlarms(deviceWithAlarmsDto);
+  }
+  // move to DeviceService impl
+  //add field error to device
+  @Scheduled(fixedDelay = 1000)
+  private void checkCondition() {
+    List<DeviceWithAlarms> allByDateOfLastContactBefore = 
+            getAllByDateOfLastContactBefore(LocalDateTime.now().minusHours(1));
+    for (DeviceWithAlarms deviceWithAlarms : allByDateOfLastContactBefore) {
+      
+    }
   }
 }

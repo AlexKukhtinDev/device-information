@@ -23,12 +23,6 @@ public class DeviceWithAlarmsController {
     this.deviceWithAlarmsService = deviceWithAlarmsService;
   }
 
-  @PostMapping("/")
-  public ResponseEntity<DeviceWithAlarms> create(
-          @RequestBody DeviceWithAlarmsDto deviceWithAlarmsDto) {
-    return ResponseEntity.ok(deviceWithAlarmsService.create(deviceWithAlarmsDto));
-  }
-
   @GetMapping("/{hours}")
   public ResponseEntity<List<DeviceWithAlarmsDto>> getDevicesWithAlarms(@PathVariable Long hours) {
     return ResponseEntity

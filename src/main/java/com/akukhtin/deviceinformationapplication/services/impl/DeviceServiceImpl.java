@@ -31,6 +31,8 @@ public class DeviceServiceImpl implements DeviceService {
     return saveDevice;
   }
 
+  //checkTime method
+  //checkCurrentVolume
   @Override
   public DeviceDto findById(Long id) {
     Optional<Device> findById = deviceRepository.findById(id);
