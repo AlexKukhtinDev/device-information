@@ -42,7 +42,7 @@ public class DeviceServiceImpl implements DeviceService {
     List<Device> lastContactBefore =
             deviceRepository
                     .findAllBySerialNumberAndDateOfLastContactBefore(
-                            serialNumber, dateOfLastContact);
+                            serialNumber, LocalDateTime.now());
 
     List<DeviceDto> alarm = lastContactBefore.stream().map(device -> {
       device.setAlarm("Alarm");
