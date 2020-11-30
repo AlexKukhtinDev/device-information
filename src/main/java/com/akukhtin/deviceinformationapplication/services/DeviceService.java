@@ -1,9 +1,16 @@
 package com.akukhtin.deviceinformationapplication.services;
 
 import com.akukhtin.deviceinformationapplication.dto.DeviceDto;
-import com.akukhtin.deviceinformationapplication.entity.Device;
+import com.akukhtin.deviceinformationapplication.dto.DeviceWithAlarmsDto;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public interface DeviceService {
-  Device create (DeviceDto deviceDto);
-  DeviceDto findById(Long id);
+  DeviceDto findBySerialNumber(Integer serialNumber);
+
+  List<DeviceDto> findAllBySerialNumberAndDateOfLastContactBefore(
+          Integer serialNumber, LocalDateTime dateOfLastContact);
+
+  List<DeviceWithAlarmsDto> findAllBySerialNumberAndCurrentVolumeIndicatorsIsLessThan(
+          Integer serialNumber, Double currentVolumeIndicators);
 }

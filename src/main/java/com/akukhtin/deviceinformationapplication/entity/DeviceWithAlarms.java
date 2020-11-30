@@ -3,8 +3,6 @@ package com.akukhtin.deviceinformationapplication.entity;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -18,11 +16,16 @@ import lombok.NoArgsConstructor;
 @Data
 public class DeviceWithAlarms {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "deviceWithAlarmsId", nullable = false, updatable = false)
-  private Long id;
-  @Column(name = "dateOfLastContact")
+  @Column(name = "serial_number")
+  private Integer serialNumber;
+  @Column(name = "manufacturer_type")
+  private Integer manufacturerType;
+  @Column(name = "device_type")
+  private Integer deviceType;
+  @Column(name = "date_Of_Last_Contact")
   private LocalDateTime dateOfLastContact;
-  @Column(name = "currentVolumeIndicatorsDifferent")
-  private Double currentVolumeIndicatorsDifferent;
+  @Column(name = "current_Volume_Indicators")
+  private Double currentVolumeIndicators;
+  @Column(name = "alarm")
+  private String alarm;
 }

@@ -1,6 +1,8 @@
 package com.akukhtin.deviceinformationapplication.dto;
 
 import java.time.LocalDateTime;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +13,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class DeviceDto {
-  private Long id;
+  @NotNull
+  @NotEmpty
   private Integer serialNumber;
+  @NotNull
+  @NotEmpty
   private Integer manufacturerType;
+  @NotNull
+  @NotEmpty
   private Integer deviceType;
-  private String dateOfLastContact;
+  @NotNull
+  @NotEmpty
+  private LocalDateTime dateOfLastContact;
+  @NotNull
+  @NotEmpty
   private Double currentVolumeIndicators;
+  @NotNull
+  @NotEmpty
+  private String alarm;
 }

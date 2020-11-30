@@ -1,5 +1,6 @@
 package com.akukhtin.deviceinformationapplication.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
@@ -9,7 +10,8 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 @Configuration
 @EnableScheduling
 public class ScheduleConfig implements SchedulingConfigurer {
-  private final int POOL_SIZE = 2;
+  @Value(value = "${pool.size}")
+  private int POOL_SIZE;
 
   @Override
   public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
@@ -17,7 +19,7 @@ public class ScheduleConfig implements SchedulingConfigurer {
     ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
 
     scheduler.setPoolSize(POOL_SIZE);
-    scheduler.setThreadNamePrefix("name");
+    scheduler.setThreadNamePrefix("job");
     scheduler.initialize();
 
     scheduledTaskRegistrar.setTaskScheduler(scheduler);

@@ -1,9 +1,8 @@
 package com.akukhtin.deviceinformationapplication.entity;
 
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -16,18 +15,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Device {
-
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
   @Column(name = "serial_number")
+  // @Value(value = "${parameter.serialnumber}")
   private Integer serialNumber;
   @Column(name = "manufacturer_type")
+  // @Value(value = "${parameter.manufacturerType}")
   private Integer manufacturerType;
   @Column(name = "device_type")
+  // @Value(value = "${parameter.deviceType}")
   private Integer deviceType;
   @Column(name = "date_Of_Last_Contact")
-  private String dateOfLastContact;
+  // @Value(value = "${parameter.dateOfLastContact}")
+  private LocalDateTime dateOfLastContact;
   @Column(name = "current_Volume_Indicators")
+  // @Value(value = "${parameter.currentVolumeIndicators}")
   private Double currentVolumeIndicators;
+  @Column(name = "alarm")
+  // @Value(value = "${alarm}")
+  private String alarm;
 }
